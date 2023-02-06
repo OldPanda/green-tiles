@@ -1,14 +1,15 @@
 <template>
-  <div class="hero min-h-768 bg-base-0 py-20">
+  <div class="hero min-h-768 bg-base-0 pt-20">
     <div class="hero-content text-center">
       <div class="max-w-screen-lg">
-        <p class="text-5xl font-bold">Review the contributions you have made on GitHub over the years.</p>
+        <p class="text-5xl font-bold">{{ HeroStatement }}</p>
         <br />
         <div class="input-group flex justify-center py-20">
-          <span>https://github.com/</span>
+          <span>{{ GitHubProfilePrefix }}</span>
           <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
             :class="{ 'input-error': showAlert }" v-model="username" />
-          <button class="btn btn-primary" @click="generate">Generate</button>
+          <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
+          <button class="btn btn-primary" @click="generate" v-else>Generate</button>
         </div>
         <br />
         <!-- Alert -->
@@ -32,7 +33,7 @@
             </div>
           </div>
         </div>
-        <!-- *** -->
+        <!-- End Alert -->
       </div>
     </div>
   </div>
@@ -41,21 +42,57 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import { contributionsStore } from "@/stores/contributions";
+import { loadingStatusStore } from "@/stores/loading";
+import { fetchGitHubContributions } from "@/services/github-data-fetcher";
+import { HeroStatement, GitHubProfilePrefix } from "@/constants";
+
 const username = ref("");
 let errorMsg = ref("");
 let showAlert = ref(false);
+let loadingStore = loadingStatusStore();
+let contributions = contributionsStore();
 
 function generate() {
   if (username.value === "") {
-    showAlert.value = true;
-    errorMsg.value = "GitHub username cannot be empty!"
+    showErrPopUp("GitHub username cannot be empty!");
     return;
   }
 
-  showAlert.value = false;
+  if (showAlert.value) {
+    dismissErrPopUp();
+  }
+  fetchContributions(username.value);
 }
 
 function dismissAlert() {
   showAlert.value = false;
+}
+
+async function fetchContributions(username: string) {
+  loadingStore.setTrue();
+  try {
+    let data = await fetchGitHubContributions(username);
+    contributions.setContributions(data);
+  } catch (e) {
+    showErrPopUp(<string>e);
+  } finally {
+    loadingStore.setFalse();
+  }
+}
+
+function showErrPopUp(message: string) {
+  if (message.length === 0) return;
+  showAlert.value = true;
+  errorMsg.value = message;
+}
+
+function dismissErrPopUp() {
+  showAlert.value = false;
+  errorMsg.value = "";
+}
+
+function delay(ms: number) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 </script>
