@@ -17,7 +17,8 @@ func init() {
 }
 
 type Headers struct {
-	ContentType string `json:"Content-Type,omitempty"`
+	ContentType              string `json:"Content-Type,omitempty"`
+	AccessControlAllowOrigin string `json:"Access-Control-Allow-Origin,omitempty"`
 }
 
 type APIRequest struct {
@@ -51,7 +52,8 @@ func HandleLambdaEvent(ctx context.Context, eventJSON json.RawMessage) (APIRespo
 			StatusCode: http.StatusBadRequest,
 			Body:       getErrMessage("Invalid request"),
 			Headers: Headers{
-				ContentType: "application/json",
+				ContentType:              "application/json",
+				AccessControlAllowOrigin: "*",
 			},
 		}, nil
 	}
@@ -63,10 +65,11 @@ func HandleLambdaEvent(ctx context.Context, eventJSON json.RawMessage) (APIRespo
 			Str("Err", err.Error()).
 			Msg("Failed to fetch contributions from GitHub")
 		return APIResponse{
-			StatusCode: http.StatusInternalServerError,
-			Body:       getErrMessage("Internal server error"),
+			StatusCode: http.StatusBadRequest,
+			Body:       getErrMessage(err.Error()),
 			Headers: Headers{
-				ContentType: "application/json",
+				ContentType:              "application/json",
+				AccessControlAllowOrigin: "*",
 			},
 		}, nil
 	}
@@ -80,7 +83,8 @@ func HandleLambdaEvent(ctx context.Context, eventJSON json.RawMessage) (APIRespo
 			StatusCode: http.StatusInternalServerError,
 			Body:       getErrMessage("Internal server error"),
 			Headers: Headers{
-				ContentType: "application/json",
+				ContentType:              "application/json",
+				AccessControlAllowOrigin: "*",
 			},
 		}, nil
 	}
@@ -89,7 +93,8 @@ func HandleLambdaEvent(ctx context.Context, eventJSON json.RawMessage) (APIRespo
 		StatusCode: http.StatusOK,
 		Body:       getDataMessage(string(respBytes)),
 		Headers: Headers{
-			ContentType: "application/json",
+			ContentType:              "application/json",
+			AccessControlAllowOrigin: "*",
 		}}, nil
 }
 
