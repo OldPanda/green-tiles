@@ -3,7 +3,7 @@
     <div class="grid-flow-col">
       Made with
       <HeartIcon class="h-6 w-6" />
-      by <a class="text-dark" href="https://old-panda.com" target="_blank">OldPanda</a>
+      by <a href="https://old-panda.com" target="_blank">OldPanda</a>
     </div>
   </footer>
 </template>
