@@ -1,9 +1,3 @@
-// export interface FetchDataResponse {
-//   contributions: GitHubContributions,
-//   error: boolean,
-//   message: string
-// }
-
 // response body returned by backend API
 export interface APIResponse {
   error: string,
