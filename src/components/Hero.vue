@@ -8,7 +8,7 @@
           <span>{{ GITHUB_PROFILE_PREFIX }}</span>
           <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
             :class="{ 'input-error': showAlert }" v-model="username" />
-          <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
+          <button class="btn btn-primary loading" v-if="loadingStatus.isLoading">Generating...</button>
           <button class="btn btn-primary" @click="generate" v-else>Generate</button>
         </div>
         <br />
@@ -50,7 +50,7 @@ import { HERO_STATEMENT, GITHUB_PROFILE_PREFIX } from "@/constants";
 const username = ref("");
 let errorMsg = ref("");
 let showAlert = ref(false);
-let loadingStore = loadingStatusStore();
+let loadingStatus = loadingStatusStore();
 let contributions = contributionsStore();
 
 function generate() {
@@ -70,14 +70,14 @@ function dismissAlert() {
 }
 
 async function fetchContributions(username: string) {
-  loadingStore.setTrue();
+  loadingStatus.setTrue();
   try {
     let data = await fetchGitHubContributions(username);
     contributions.setContributions(data);
   } catch (e) {
     showErrPopUp(<string>e);
   } finally {
-    loadingStore.setFalse();
+    loadingStatus.setFalse();
   }
 }
 

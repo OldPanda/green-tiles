@@ -1,4 +1,4 @@
-import type { FetchDataResponse, APIResponse, GitHubContributions } from '@/types';
+import type { APIResponse, GitHubContributions } from '@/types';
 
 const API_ENDPOINT = "https://api.old-panda.com/github/contributions?username="
 
