@@ -6,7 +6,7 @@ Yet another web tool to view your GitHub contributions. Inspired by [Green Wall]
 
 ## Tech Stacks
 * Framework: [Vite](https://vitejs.dev/)
-* UI Lib: [daisyUI](https://daisyui.com/)
+* UI Library: [daisyUI](https://daisyui.com/)
 * Backend: AWS API Gateway + AWS Lambda (here's a [tutorial](https://old-panda.com/2020/03/02/lambda-api-gateway-note/) in Chinese)
 
 ## Project Setup
