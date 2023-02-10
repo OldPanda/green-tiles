@@ -2,10 +2,10 @@
   <div class="hero min-h-768 bg-base-0 pt-20">
     <div class="hero-content text-center">
       <div class="max-w-screen-lg">
-        <p class="text-5xl font-bold">{{ HeroStatement }}</p>
+        <p class="text-5xl font-bold">{{ HERO_STATEMENT }}</p>
         <br />
         <div class="input-group flex justify-center py-20">
-          <span>{{ GitHubProfilePrefix }}</span>
+          <span>{{ GITHUB_PROFILE_PREFIX }}</span>
           <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
             :class="{ 'input-error': showAlert }" v-model="username" />
           <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
@@ -45,7 +45,7 @@ import { ref } from "vue";
 import { contributionsStore } from "@/stores/contributions";
 import { loadingStatusStore } from "@/stores/loading";
 import { fetchGitHubContributions } from "@/services/github-data-fetcher";
-import { HeroStatement, GitHubProfilePrefix } from "@/constants";
+import { HERO_STATEMENT, GITHUB_PROFILE_PREFIX } from "@/constants";
 
 const username = ref("");
 let errorMsg = ref("");
@@ -90,9 +90,5 @@ function showErrPopUp(message: string) {
 function dismissErrPopUp() {
   showAlert.value = false;
   errorMsg.value = "";
-}
-
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 </script>

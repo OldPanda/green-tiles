@@ -21,7 +21,7 @@ const (
 	authorization_value_template      = "Bearer %s"
 	date_iso_format                   = "2006-01-02T15:04:05Z"
 	contribution_years_request_body   = `{"query": "{ user(login: \"%s\") { name login avatarUrl contributionsCollection { years: contributionYears } } }"}`
-	contribution_details_request_body = `{"query": "{ user(login: \"%s\") { contributionsCollection(from: \"%s\", to: \"%s\") { contributionCalendar { total: totalContributions weeks { days: contributionDays { level: contributionLevel weekday } } } } } }"}`
+	contribution_details_request_body = `{"query": "{ user(login: \"%s\") { contributionsCollection(from: \"%s\", to: \"%s\") { contributionCalendar { total: totalContributions weeks { days: contributionDays { level: contributionLevel weekday contributionCount date } } } } } }"}`
 )
 
 var github_oauth_token string

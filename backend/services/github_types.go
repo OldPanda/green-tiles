@@ -34,6 +34,8 @@ type Week struct {
 type Day struct {
 	Level   string `json:"level"`
 	Weekday int    `json:"weekday"`
+	Count   int    `json:"contributionCount"`
+	Date    string `json:"date"`
 }
 
 type GitHubError struct {

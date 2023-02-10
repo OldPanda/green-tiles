@@ -13,7 +13,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.10",
     "@headlessui/vue": "^1.7.7",
-    "@heroicons/vue": "^2.0.13",
+    "@heroicons/vue": "^2.0.15",
     "daisyui": "^2.46.1",
     "element-plus": "^2.2.28",
     "pinia": "^2.0.28",
@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/jsdom": "^20.0.1",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.13.0",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/test-utils": "^2.2.6",
     "@vue/tsconfig": "^0.1.3",

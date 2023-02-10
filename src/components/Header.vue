@@ -1,10 +1,10 @@
 <template>
   <div class="navbar bg-base-100">
     <div class="flex-1">
-      <a class="btn btn-ghost normal-case text-xl" href="#">{{ Branding }}</a>
+      <a class="btn btn-ghost normal-case text-xl" href="#">{{ BRANDING }}</a>
     </div>
     <div class="flex-none">
-      <a class="btn btn-square btn-ghost" :href="ProjectURL" target="_blank">
+      <a class="btn btn-square btn-ghost" :href="PROJECT_URL" target="_blank">
         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
           class="inline-block h-5 w-5 fill-current md:h-6 md:w-6">
           <path
@@ -17,5 +17,5 @@
 </template>
 
 <script setup lang="ts">
-import { Branding, ProjectURL } from '@/constants';
+import { BRANDING, PROJECT_URL } from '@/constants';
 </script>
