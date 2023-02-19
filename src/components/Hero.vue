@@ -1,5 +1,5 @@
 <template>
-  <div class="hero min-h-screen bg-base-0 pt-20">
+  <div class="hero min-h-768 bg-base-0 pt-20">
     <div class="hero-content text-center">
       <div class="max-w-screen-lg">
         <p class="text-3xl lg:text-5xl font-bold">{{ HERO_STATEMENT }}</p>
