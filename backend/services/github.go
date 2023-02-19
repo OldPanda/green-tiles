@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"sync"
 	"time"
 
 	"github.com/rs/zerolog"
@@ -39,7 +40,6 @@ func init() {
 type ContributionResult struct {
 	Login                 string     `json:"login"`
 	AvatarURL             string     `json:"avatarUrl"`
-	Years                 []int      `json:"years"`
 	ContributionCalendars []Calendar `json:"calendars"`
 }
 
@@ -70,22 +70,51 @@ func GetAllContributions(username string) (*ContributionResult, error) {
 	response := &ContributionResult{
 		Login:                 resp.Data.User.Login,
 		AvatarURL:             resp.Data.User.AvatarURL,
-		Years:                 resp.Data.User.ContributionsCollection.Years,
 		ContributionCalendars: []Calendar{},
 	}
 
 	// 2. Get contributions in each year
-	for _, year := range resp.Data.User.ContributionsCollection.Years {
-		r, err := GetContributionsDetailsInAYear(username, year)
-		if err != nil {
-			return nil, err
+	response.ContributionCalendars = make([]Calendar, len(resp.Data.User.ContributionsCollection.Years))
+	type CalendarData struct {
+		calendar Calendar
+		idx      int
+		err      error
+	}
+	calendarChan := make(chan CalendarData, len(resp.Data.User.ContributionsCollection.Years))
+	var wg sync.WaitGroup
+	for idx, year := range resp.Data.User.ContributionsCollection.Years {
+		wg.Add(1)
+		go func(idx int, year int) {
+			defer wg.Done()
+			r, err := GetContributionsDetailsInAYear(username, year)
+			if err != nil {
+				calendarChan <- CalendarData{
+					calendar: Calendar{},
+					idx:      idx,
+					err:      err,
+				}
+				return
+			}
+			calendar := Calendar{
+				Year:  year,
+				Total: r.Total,
+				Weeks: r.Weeks,
+			}
+			calendarChan <- CalendarData{
+				calendar: calendar,
+				idx:      idx,
+				err:      nil,
+			}
+		}(idx, year)
+	}
+	wg.Wait()
+	close(calendarChan)
+
+	for data := range calendarChan {
+		if data.err != nil {
+			return nil, data.err
 		}
-		calendar := Calendar{
-			Year:  year,
-			Total: r.Total,
-			Weeks: r.Weeks,
-		}
-		response.ContributionCalendars = append(response.ContributionCalendars, calendar)
+		response.ContributionCalendars[data.idx] = data.calendar
 	}
 
 	return response, nil

@@ -59,6 +59,9 @@ func HandleLambdaEvent(ctx context.Context, eventJSON json.RawMessage) (APIRespo
 	}
 
 	username := request.QueryStringParams.Username
+	log.Info().
+		Str("Username", username).
+		Msg("Fetching contribution records")
 	contributions, err := services.GetAllContributions(username)
 	if err != nil {
 		log.Error().
