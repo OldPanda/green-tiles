@@ -40,7 +40,6 @@ func init() {
 type ContributionResult struct {
 	Login                 string     `json:"login"`
 	AvatarURL             string     `json:"avatarUrl"`
-	Years                 []int      `json:"years"`
 	ContributionCalendars []Calendar `json:"calendars"`
 }
 
@@ -71,7 +70,6 @@ func GetAllContributions(username string) (*ContributionResult, error) {
 	response := &ContributionResult{
 		Login:                 resp.Data.User.Login,
 		AvatarURL:             resp.Data.User.AvatarURL,
-		Years:                 resp.Data.User.ContributionsCollection.Years,
 		ContributionCalendars: []Calendar{},
 	}
 
