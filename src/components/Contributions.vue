@@ -1,5 +1,5 @@
 <template>
-  <div class="grid place-content-center" v-if="contributions.hasData()">
+  <div class="lg:grid justify-center mx-2" v-if="contributions.hasData()">
     <!-- header -->
     <a class="grid justify-items-start mb-4" :href="GITHUB_PROFILE_PREFIX + contributions.getContributions().login"
       target="_blank">
@@ -15,26 +15,28 @@
     <!-- end header -->
     <div class="grid justify-items-start" v-for="calendar in contributions.getContributions().calendars">
       <p>{{ calendar.total }} contributions in {{ calendar.year }}</p>
-      <svg width="728" height="112" class="mb-10">
-        <g transform="translate(15, 20)">
-          <g v-for="(week, idx) in calendar.weeks" :transform="`translate(` + idx * 14 + `, 0)`">
-            <rect width="10" height="10" v-for="day in week.days" :x="25 - idx" :y="day.weekday * 13" rx="2" ry="2"
-              :style="{ 'fill': fillColor(day.level) }">
-              <title>{{ tooltipStatement(day) }}</title>
-            </rect>
+      <div class="container" style="overflow-x: auto;">
+        <svg width="728" height="112" class="mb-10">
+          <g transform="translate(15, 20)">
+            <g v-for="(week, idx) in calendar.weeks" :transform="`translate(` + idx * 14 + `, 0)`">
+              <rect width="10" height="10" v-for="day in week.days" :x="25 - idx" :y="day.weekday * 13" rx="2" ry="2"
+                :style="{ 'fill': fillColor(day.level) }">
+                <title>{{ tooltipStatement(day) }}</title>
+              </rect>
+            </g>
+
+            <text v-for="pair in monthPositions(calendar)" :x="pair.xPos" y="-7">{{ pair.month }}</text>
+
+            <text dx="-15" dy="8" style="display: none;">Sun</text>
+            <text dx="-15" dy="22">Mon</text>
+            <text dx="-15" dy="32" style="display: none;">Tue</text>
+            <text dx="-15" dy="48">Wed</text>
+            <text dx="-15" dy="57" style="display: none;">Thu</text>
+            <text dx="-15" dy="73">Fri</text>
+            <text dx="-15" dy="81" style="display: none;">Sat</text>
           </g>
-
-          <text v-for="pair in monthPositions(calendar)" :x="pair.xPos" y="-7">{{ pair.month }}</text>
-
-          <text dx="-15" dy="8" style="display: none;">Sun</text>
-          <text dx="-15" dy="22">Mon</text>
-          <text dx="-15" dy="32" style="display: none;">Tue</text>
-          <text dx="-15" dy="48">Wed</text>
-          <text dx="-15" dy="57" style="display: none;">Thu</text>
-          <text dx="-15" dy="73">Fri</text>
-          <text dx="-15" dy="81" style="display: none;">Sat</text>
-        </g>
-      </svg>
+        </svg>
+      </div>
     </div>
   </div>
 </template>

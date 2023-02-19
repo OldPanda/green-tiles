@@ -1,8 +1,10 @@
 <template>
   <div class="navbar bg-base-100">
+    <!-- Website branding -->
     <div class="flex-1">
       <a class="btn btn-ghost normal-case text-xl" href="#">{{ BRANDING }}</a>
     </div>
+    <!-- GitHub logo -->
     <div class="flex-none">
       <a class="btn btn-square btn-ghost" :href="PROJECT_URL" target="_blank">
         <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
