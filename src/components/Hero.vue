@@ -2,14 +2,26 @@
   <div class="hero min-h-768 bg-base-0 pt-20">
     <div class="hero-content text-center">
       <div class="max-w-screen-lg">
-        <p class="text-5xl font-bold">{{ HERO_STATEMENT }}</p>
+        <p class="text-3xl lg:text-5xl font-bold">{{ HERO_STATEMENT }}</p>
         <br />
-        <div class="input-group flex justify-center py-20">
-          <span>{{ GITHUB_PROFILE_PREFIX }}</span>
-          <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
-            :class="{ 'input-error': showAlert }" v-model="username" />
-          <button class="btn btn-primary loading" v-if="loadingStatus.isLoading">Generating...</button>
-          <button class="btn btn-primary" @click="generate" v-else>Generate</button>
+        <!-- Show on desktop screen -->
+        <div class="hidden lg:block">
+          <div class="input-group flex justify-center py-20">
+            <span>{{ GITHUB_PROFILE_PREFIX }}</span>
+            <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
+              :class="{ 'input-error': showAlert }" v-model="username" />
+            <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
+            <button class="btn btn-primary" @click="generate" v-else>Generate</button>
+          </div>
+        </div>
+        <!-- Show on mobile screen -->
+        <div class="lg:hidden">
+          <div class="input-group flex justify-center py-20 lg:hidden">
+            <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
+              :class="{ 'input-error': showAlert }" v-model="username" />
+            <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
+            <button class="btn btn-primary" @click="generate" v-else>Generate</button>
+          </div>
         </div>
         <br />
         <!-- Alert -->
@@ -50,7 +62,7 @@ import { HERO_STATEMENT, GITHUB_PROFILE_PREFIX } from "@/constants";
 const username = ref("");
 let errorMsg = ref("");
 let showAlert = ref(false);
-let loadingStatus = loadingStatusStore();
+let loadingStore = loadingStatusStore();
 let contributions = contributionsStore();
 
 function generate() {
@@ -70,14 +82,14 @@ function dismissAlert() {
 }
 
 async function fetchContributions(username: string) {
-  loadingStatus.setTrue();
+  loadingStore.setTrue();
   try {
     let data = await fetchGitHubContributions(username);
     contributions.setContributions(data);
   } catch (e) {
     showErrPopUp(<string>e);
   } finally {
-    loadingStatus.setFalse();
+    loadingStore.setFalse();
   }
 }
 
