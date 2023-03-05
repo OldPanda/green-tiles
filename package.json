@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.15",
+    "@vercel/analytics": "^0.1.11",
     "daisyui": "^2.46.1",
     "pinia": "^2.0.28",
     "vue": "^3.2.45"
