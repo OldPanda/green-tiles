@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --none: #ebedf0;
+    --first: #9be9a8;
+    --second: #40c463;
+    --third: #30a14e;
+    --fourth: #216e39;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --none: #161b22;
+        --first: #006d32;
+        --second: #006d32;
+        --third: #26a641;
+        --fourth: #39d353;
+    }
+}
