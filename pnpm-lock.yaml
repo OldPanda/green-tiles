@@ -30,7 +30,7 @@ devDependencies:
     version: 18.13.0
   '@vitejs/plugin-vue':
     specifier: ^4.0.0
-    version: 4.0.0(vite@4.5.2)(vue@3.2.47)
+    version: 4.0.0(vite@4.5.3)(vue@3.2.47)
   '@vue/test-utils':
     specifier: ^2.2.6
     version: 2.2.10(vue@3.2.47)
@@ -56,8 +56,8 @@ devDependencies:
     specifier: ~4.7.4
     version: 4.7.4
   vite:
-    specifier: ^4.5.2
-    version: 4.5.2(@types/node@18.13.0)
+    specifier: ^4.5.3
+    version: 4.5.3(@types/node@18.13.0)
   vitest:
     specifier: ^0.25.6
     version: 0.25.8(jsdom@20.0.3)
@@ -359,14 +359,14 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@vitejs/plugin-vue@4.0.0(vite@4.5.2)(vue@3.2.47):
+  /@vitejs/plugin-vue@4.0.0(vite@4.5.3)(vue@3.2.47):
     resolution: {integrity: sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.5.2(@types/node@18.13.0)
+      vite: 4.5.3(@types/node@18.13.0)
       vue: 3.2.47
     dev: true
 
@@ -2225,8 +2225,8 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite@4.5.2(@types/node@18.13.0):
-    resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
+  /vite@4.5.3(@types/node@18.13.0):
+    resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
@@ -2297,7 +2297,7 @@ packages:
       tinybench: 2.3.1
       tinypool: 0.3.1
       tinyspy: 1.1.1
-      vite: 4.5.2(@types/node@18.13.0)
+      vite: 4.5.3(@types/node@18.13.0)
     transitivePeerDependencies:
       - less
       - lightningcss
