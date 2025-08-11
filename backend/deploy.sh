@@ -3,7 +3,7 @@
 CUR_PATH=`pwd`
 echo $CUR_PATH
 BUILD_DIR="$CUR_PATH/build"
-BUILD_BIN_FILE="github-contributions"
+BUILD_BIN_FILE="bootstrap"
 PACKAGE_FILE="function.zip"
 
 echo "Building ..."
@@ -13,7 +13,7 @@ fi
 if [[ -e $BUILD_DIR/$BUILD_BIN_FILE ]]; then
     rm $BUILD_DIR/$BUILD_BIN_FILE
 fi
-GOOS=linux go build -o $BUILD_DIR/$BUILD_BIN_FILE
+GOOS=linux GOARCH=amd64 go build -tags lambda.norpc -o $BUILD_DIR/$BUILD_BIN_FILE
 if [[ ! -e $BUILD_DIR/$BUILD_BIN_FILE ]]; then
     echo "Build FAILED!"
     exit -1
