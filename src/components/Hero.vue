@@ -6,8 +6,8 @@
         <br />
         <!-- Show on desktop screen -->
         <div class="hidden lg:block">
-          <div class="input-group flex justify-center py-20">
-            <span>{{ GITHUB_PROFILE_PREFIX }}</span>
+          <div class="flex flex-row items-center justify-center gap-2 py-20">
+            <span class="whitespace-nowrap">{{ GITHUB_PROFILE_PREFIX }}</span>
             <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
               :class="{ 'input-error': showAlert }" v-model="username" />
             <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
