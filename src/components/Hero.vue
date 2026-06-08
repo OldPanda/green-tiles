@@ -1,26 +1,19 @@
 <template>
-  <div class="hero min-h-768 bg-base-0 pt-20">
+  <div class="hero min-h-[48rem] bg-base-100 pt-4">
     <div class="hero-content text-center">
       <div class="max-w-screen-lg">
         <p class="text-3xl lg:text-5xl font-bold">{{ HERO_STATEMENT }}</p>
         <br />
-        <!-- Show on desktop screen -->
-        <div class="hidden lg:block">
-          <div class="flex flex-row items-center justify-center gap-2 py-20">
-            <span class="whitespace-nowrap">{{ GITHUB_PROFILE_PREFIX }}</span>
-            <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
+        <div class="flex flex-col items-center justify-center gap-3 py-20 lg:flex-row">
+          <span class="hidden whitespace-nowrap lg:inline">{{ GITHUB_PROFILE_PREFIX }}</span>
+          <div class="join">
+            <input required type="text" placeholder="Your GitHub Username" class="input join-item w-52 sm:w-72"
               :class="{ 'input-error': showAlert }" v-model="username" />
-            <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
-            <button class="btn btn-primary" @click="generate" v-else>Generate</button>
-          </div>
-        </div>
-        <!-- Show on mobile screen -->
-        <div class="lg:hidden">
-          <div class="input-group flex justify-center py-20 lg:hidden">
-            <input required type="text" placeholder="Your GitHub Username" class="input input-bordered"
-              :class="{ 'input-error': showAlert }" v-model="username" />
-            <button class="btn btn-primary loading" v-if="loadingStore.isLoading">Generating...</button>
-            <button class="btn btn-primary" @click="generate" v-else>Generate</button>
+            <button class="btn btn-primary join-item" disabled v-if="loadingStore.isLoading">
+              <span class="loading loading-spinner loading-xs"></span>
+              Generating
+            </button>
+            <button class="btn btn-primary join-item" @click="generate" v-else>Generate</button>
           </div>
         </div>
         <br />
