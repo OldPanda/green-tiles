@@ -6,7 +6,7 @@ export async function fetchGitHubContributions(username: string): Promise<GitHub
   if (username.length === 0) {
     throw new Error("Username is empty.");
   }
-  let url = API_ENDPOINT + username;
+  let url = API_ENDPOINT + encodeURIComponent(username);
   let resp = await fetch(url);
   let json: APIResponse = await resp.json();
   if (resp.status !== 200) {

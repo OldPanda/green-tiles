@@ -80,7 +80,7 @@ async function fetchContributions(username: string) {
     let data = await fetchGitHubContributions(username);
     contributions.setContributions(data);
   } catch (e) {
-    showErrPopUp(<string>e);
+    showErrPopUp(e instanceof Error ? e.message : String(e));
   } finally {
     loadingStore.setFalse();
   }

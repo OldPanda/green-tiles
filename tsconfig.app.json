@@ -11,14 +11,11 @@
   "compilerOptions": {
     "composite": true,
     "ignoreDeprecations": "6.0",
-    "baseUrl": ".",
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "preserveValueImports": false,
-    "importsNotUsedAsValues": "remove",
     "verbatimModuleSyntax": true,
   }
 }

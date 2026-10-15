@@ -59,8 +59,12 @@ function monthPositions(calendar: GitHubCalendar): MonthPosPair[] {
   });
   let step = 13;
   let weekCount = 0;
-  let visited = new Set<number>();
+  let visited = new Set<number>([1]);
   for (let week of calendar.weeks) {
+    if (week.days.length === 0) {
+      weekCount++;
+      continue;
+    }
     let month = +week.days[0].date.split("-")[1];
     if (visited.has(month)) {
       weekCount++;
