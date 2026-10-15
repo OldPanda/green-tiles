@@ -63,7 +63,7 @@ func GetAllContributions(username string) (*ContributionResult, error) {
 		return nil, err
 	}
 
-	if resp.Errors != nil {
+	if len(resp.Errors) > 0 {
 		return nil, errors.New(resp.Errors[0].Message)
 	}
 
@@ -130,7 +130,7 @@ func GetContributionsDetailsInAYear(username string, year int) (*ContributionCal
 		return nil, err
 	}
 
-	if resp.Errors != nil {
+	if len(resp.Errors) > 0 {
 		return nil, errors.New(resp.Errors[0].Message)
 	}
 
@@ -158,6 +158,9 @@ func callGitHubApi(requestBody string) (*GitHubResponse, error) {
 	}
 	if err := json.Unmarshal(rawData, &respJson); err != nil {
 		return nil, err
+	}
+	if respJson == nil {
+		return nil, errors.New("GitHub returned an empty response")
 	}
 	if respJson.Message != "" {
 		// got error message

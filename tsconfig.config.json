@@ -11,8 +11,6 @@
     "types": [
       "node"
     ],
-    "preserveValueImports": false,
-    "importsNotUsedAsValues": "remove",
     "verbatimModuleSyntax": true,
   }
 }

@@ -1,2 +1,6 @@
 ignoredBuiltDependencies:
   - esbuild
+
+# Vite's optional YAML peer can otherwise retain the vulnerable locked version.
+overrides:
+  yaml@<2.8.3: ^2.8.3
